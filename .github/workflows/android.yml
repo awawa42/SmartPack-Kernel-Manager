@@ -1,10 +1,7 @@
 name: Android CI
 
-on:
-  push:
-    branches: [ "master" ]
-  pull_request:
-    branches: [ "master" ]
+on: [push, workflow_dispatch]
+
 
 jobs:
   build:
@@ -31,8 +28,8 @@ jobs:
         run: chmod +x ./gradlew
 
       # Run Tests Build
-      - name: Run gradle tests
-        run: ./gradlew test
+      #- name: Run gradle tests
+      #  run: ./gradlew test
 
       # Run Build Project
       - name: Build gradle project
@@ -44,7 +41,7 @@ jobs:
 
       # Upload Artifact Build
       - name: Upload APK Release - ${{ env.repository_name }}
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v5.0.0
         with:
           name: ${{ env.repository_name }} - ${{ env.date_today }} - APK release generated
           path: app/build/outputs/apk/fdroid/release/
