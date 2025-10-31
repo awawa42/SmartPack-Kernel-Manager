@@ -73,6 +73,7 @@ import com.smartpack.kernelmanager.fragments.other.SettingsFragment;
 import com.smartpack.kernelmanager.fragments.statistics.DeviceFragment;
 import com.smartpack.kernelmanager.fragments.statistics.InputsFragment;
 import com.smartpack.kernelmanager.fragments.statistics.MemoryFragment;
+import com.smartpack.kernelmanager.fragments.statistics.ZramFragment;
 import com.smartpack.kernelmanager.fragments.statistics.OverallFragment;
 import com.smartpack.kernelmanager.fragments.tools.BackupFragment;
 import com.smartpack.kernelmanager.fragments.tools.BuildpropFragment;
@@ -101,6 +102,7 @@ import com.smartpack.kernelmanager.utils.kernel.sound.Sound;
 import com.smartpack.kernelmanager.utils.kernel.thermal.Thermal;
 import com.smartpack.kernelmanager.utils.kernel.wake.Wake;
 import com.smartpack.kernelmanager.utils.kernel.wakelock.Wakelocks;
+import com.smartpack.kernelmanager.utils.kernel.vm.ZRAM;
 import com.smartpack.kernelmanager.utils.root.RootUtils;
 import com.smartpack.kernelmanager.utils.tools.Backup;
 import com.smartpack.kernelmanager.utils.tools.KernelUpdater;
@@ -182,6 +184,9 @@ public class NavigationActivity extends BaseActivity
         mFragments.add(new NavigationActivity.NavigationFragment(R.string.statistics));
         mFragments.add(new NavigationActivity.NavigationFragment(R.string.overall, OverallFragment.class, R.drawable.ic_dashboard));
         mFragments.add(new NavigationActivity.NavigationFragment(R.string.device, DeviceFragment.class, R.drawable.ic_device));
+        if (ZRAM.supported()) {
+            mFragments.add(new NavigationActivity.NavigationFragment(R.string.zram, ZramFragment.class, R.drawable.ic_server));
+        }
         if (Device.MemInfo.getInstance().getItems().size() > 0) {
             mFragments.add(new NavigationActivity.NavigationFragment(R.string.memory, MemoryFragment.class, R.drawable.ic_save));
         }

@@ -39,6 +39,11 @@ public class ZRAM {
     private static final String RESET = "/sys/block/zram0/reset";
     private static final String MAX_COMP_STREAMS = "/sys/block/zram0/max_comp_streams";
     private static final String COMP_ALGO = "/sys/block/zram0/comp_algorithm";
+    private static final String STAT = "/sys/block/zram0/stat";
+    private static final String MM_STAT = "/sys/block/zram0/mm_stat";
+    private static final String IO_STAT = "/sys/block/zram0/io_stat";
+    private static final String BD_STAT = "/sys/block/zram0/bd_stat";
+    private static final String BACKING_DEV = "/sys/block/zram0/backing_dev";
 
     public static void setDisksize(final long value, final Context context) {
         String maxCompStrems = null;
@@ -100,6 +105,43 @@ public class ZRAM {
 
     public static boolean hasZRAMAlgo() {
         return Utils.existFile(COMP_ALGO);
+    }
+
+    public static boolean hasBACKINGDEV() {
+        return Utils.existFile(BACKING_DEV);
+    }
+
+    public static String getBACKINGDEV() {
+        return Utils.readFile(BACKING_DEV);
+    }
+
+    private static List<Long> getStats(String path) {
+        String content = Utils.readFile(path);
+        List<Long> list = new ArrayList<>();
+        if (content == null || content.trim().isEmpty()) {
+            return list;
+        }
+        String[] stats = content.trim().split("\\s+");
+        for (String stat : stats) {
+            list.add(Utils.strToLong(stat));
+        }
+        return list;
+    }
+
+    public static List<Long> getStat() {
+        return getStats(STAT);
+    }
+
+    public static List<Long> getMMStat() {
+        return getStats(MM_STAT);
+    }
+
+    public static List<Long> getIOStat() {
+        return getStats(IO_STAT);
+    }
+
+    public static List<Long> getBDStat() {
+        return getStats(BD_STAT);
     }
 
     public static boolean supported() {

@@ -816,6 +816,21 @@
     <string name="wkl_bluetooth">Bluetooth</string>
     <string name="wkl_bluetooth_summary">Bluetooth Wakelock. Disable for better deep sleep and less awake time. Enable for stock behavior.</string>
 
+    <!-- Zram Statics -->
+    <string name="zram_wb_card">Z-RAM Writeback</string>
+    <string name="compressed_data_size">Compressed size</string>
+    <string name="original_data_size">Original size</string>
+    <string name="memory_used_total">Memory used total</string>
+    <string name="compression_ratio">Compression ratio</string>
+    <string name="backing_dev">Backing device</string>
+    <string name="bd_count">Written back</string>
+    <string name="bd_reads">Total reads</string>
+    <string name="bd_writes">Total writeback</string>
+    <string name="zram_reads">Total zram reads</string>
+    <string name="zram_writes">Total zram writes</string>
+    <string name="failed_reads">Failed reads</string>
+    <string name="failed_writes">Failed writes</string>
+
     <!-- Virtual Memory -->
     <string name="zram">Z-RAM</string>
     <string name="zram_algo">Z-RAM Algorithm</string>
