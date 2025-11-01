@@ -117,13 +117,9 @@ public class LMK {
         return Utils.existFile(PROCESS_RECLAIM);
     }
 
-    private static boolean hasLMKDSupported() {
-        return RootUtils.runAndGetOutput("getprop init.svc.lmkd").equals("running");
-    }
-
     public static boolean supported() {
         try {
-            return !hasLMKDSupported() && (getMinFrees().size() > 1 || hasFastRun() || hasProcessReclaim());
+            return getMinFrees().size() > 1 || hasFastRun() || hasProcessReclaim();
         } catch (NullPointerException ignored) {
             return false;
         }
