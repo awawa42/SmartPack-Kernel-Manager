@@ -39,6 +39,19 @@ jobs:
       - name: Build apk release project (APK) - ${{ env.main_project_module }} module
         run: ./gradlew assemble
 
+      - name: upload to tg
+        env:
+          CHAT_ID: ${{ secrets.CHAT_ID }}
+          API_KEY: ${{ secrets.TG_BOT_TOKEN }}
+        run: |
+              set -x
+              for apkfile in app/build/outputs/apk/**/*.apk;do
+              curl -X POST "https://api.telegram.org/bot${API_KEY}/sendDocument" \
+              -F "parse_mode=MarkdownV2" \
+              -F "chat_id=${CHAT_ID}" \
+              -F "document=@${apkfile}" \
+              -F "caption=from [CI ${GITHUB_RUN_ID}](https://github.com/awawa42/SmartPack-Kernel-Manager/actions/runs/${GITHUB_RUN_ID}/)" > /dev/null ||true
+              done
       # Upload Artifact Build
       - name: Upload APK Release - ${{ env.repository_name }}
         uses: actions/upload-artifact@v5.0.0
