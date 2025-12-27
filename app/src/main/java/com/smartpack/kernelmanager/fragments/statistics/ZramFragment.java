@@ -102,15 +102,21 @@ public class ZramFragment extends RecyclerViewFragment {
                                                                 : String.format("%.2f %%", mmStatList.get(2)
                                                                                 / (double) mmStatList.get(0) * 100) },
                                 { getString(R.string.zram_reads),
-                                                String.format("%.2f", statList.get(2) / 2.0 / 1024.0) + " "
+                                                String.format("%.2f",
+                                                                (statList.size() > 2 ? statList.get(2)
+                                                                                : 0) / 2.0 / 1024.0)
+                                                                + " "
                                                                 + getString(R.string.mb) },
                                 { getString(R.string.zram_writes),
-                                                String.format("%.2f", statList.get(6) / 2.0 / 1024.0) + " "
+                                                String.format("%.2f",
+                                                                (statList.size() > 6 ? statList.get(6)
+                                                                                : 0) / 2.0 / 1024.0)
+                                                                + " "
                                                                 + getString(R.string.mb) },
                                 { getString(R.string.failed_reads),
-                                                String.format("%d", ioStatList.get(0)) },
+                                                String.format("%d", ioStatList.size() > 0 ? ioStatList.get(0) : 0) },
                                 { getString(R.string.failed_writes),
-                                                String.format("%d", ioStatList.get(1)) }
+                                                String.format("%d", ioStatList.size() > 1 ? ioStatList.get(1) : 0) }
                 };
 
                 for (String[] zramStat : zramStats) {
