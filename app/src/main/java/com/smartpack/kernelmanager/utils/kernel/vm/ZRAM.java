@@ -145,7 +145,7 @@ public class ZRAM {
     }
 
     public static boolean supported() {
-        return Utils.existFile(ZRAM);
+        return Utils.existFile(ZRAM) && getMMStat().size() > 0;
     }
 
     private static void run(String command, String id, Context context) {
